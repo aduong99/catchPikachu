@@ -1,26 +1,30 @@
 /************************************************
-PettingChi
-  by Fiona Young
-Overview – Demonstration on p5.clickable abilities with buttons while also incorporating p5.timer for a fun surprise.
+  Catch Pikachu
+  by An Duong
 
+  Uses clickable.p5 and timer.p5 functions to catch a wild Pikachu!
 ------------------------------------------------
-Notes: 
-(1) Utilizes p5.timer.js and p5.clickable.js classes.
 ************************************************/
 
 
 //Global variables
 var simpleTimer;
 var waitForClick = true;
-var chiButton;
-var chiImage = [];
+var pikaButton;
+var pikachuImg = [];
+var pikaSound;
 
 //Preload code
 function preload(){
-  chiImage[0] = loadImage('assets/chiSit.png');
-  chiImage[1] = loadImage('assets/chiHover.png');
-  chiImage[2] = loadImage('assets/chiLove.png');
-  chiImage[3] = loadImage('assets/chiNo.png');
+  pikachuImg[0] = loadImage('assets/pikachu.png');
+  pikachuImg[1] = loadImage('assets/pikachu2.png');
+  pikachuImg[2] = loadImage('assets/pikachu4.png');
+  pikachuImg[3] = loadImage('assets/pikachu3.png');
+
+  pokeball = loadImage('assets/pokeball.png');
+
+  pikaSound = loadSound('assets/pikachuSound.mp3');
+  teamRocketSound = loadSound('assets/teamRocket.mp3')
 }
 
 //Setup code
@@ -30,80 +34,88 @@ function setup() {
   simpleTimer = new Timer(1000);
   simpleTimer.start();
 
-  makeChiButton();
-    
+  makePikaButton();
+
   textAlign(CENTER);
-  textSize(20);
+  textSize(40);
+  textFont('Futura');
  }
 
 //Draw code
 function draw() {
-  background(245);
+  background(200,200,100);
+
 
   frameRate(60);
 
   if( waitForClick ) {
-      fill(180);
-      text("Hi, I'm Chi! Click to pet me :)", width/2, height/6); 
+      fill(0);
+      text("Pika? Pika! Pika!", width/2, height/6); 
   }  
   else {
     updateTimer();
   }
     
-  chiButton.draw();
+  pikaButton.draw();
+
+  noCursor();
+  image(pokeball, mouseX, mouseY);
 }
 
 function updateTimer() {
   if( simpleTimer.expired() ) {
-    fill(180);
-    chiButton.image = chiImage[3];
-    text("NO, no pets!", width/2, height/6);
+    fill(0);
+    pikaButton.image = pikachuImg[3];
+    teamRocketSound.play();
+    text("Oh! Too Late! Back To The Wild!", width/2, height/6);
     waitForClick = true;
     frameRate(0.5);
   }
   else {
-    fill(180);
-    text("Hi, I'm Chi! Click to pet me :)", width/2, height/6);
+    fill(0);
+    text("A Wild Pikachu Appears!", width/2, height/5);
+    text('Click To Catch Pikachu Before Time Runs Out!', width/2, height/5 + 50);
   }
 }
 
 //Button design
-function makeChiButton() {
+function makePikaButton() {
 
-  chiButton = new Clickable();
+  pikaButton = new Clickable();
 
-  chiButton.image = chiImage[0];
+  pikaButton.image = pikachuImg[0];
     
-  chiButton.locate(width/2 - (chiButton.width * 2), height/2 - (chiButton.height * 4));
+  pikaButton.locate(width/2 - (pikaButton.width * 2), height/2 - (pikaButton.height * 4));
     
-  chiButton.width = 400;
-  chiButton.height = 400;
+  pikaButton.width = 480;
+  pikaButton.height = 480;
     
-  chiButton.color = "#00000000";
-  chiButton.stroke = "#00000000"; 
-  chiButton.text = " ";
+  pikaButton.color = "#00000000";
+  pikaButton.stroke = "#00000000"; 
+  pikaButton.text = " ";
 
-  chiButton.onPress = chiButtonPressed;
-  chiButton.onHover = chiButtonHover;
-  chiButton.onOutside = chiButtonOutside;
-  chiButton.onRelease = chiButtonAway;
+  pikaButton.onPress = pikaButtonPressed;
+  pikaButton.onHover = pikaButtonHover;
+  pikaButton.onOutside = pikaButtonOutside;
+  pikaButton.onRelease = pikaButtonAway;
 }
 
 //Button states
-chiButtonPressed = function () {
-  chiButton.image = chiImage[2];
+pikaButtonPressed = function () {
+  pikaButton.image = pikachuImg[2];
+  pikaSound.play();
 }
 
-chiButtonHover = function () {
-  chiButton.image = chiImage[1];
+pikaButtonHover = function () {
+  pikaButton.image = pikachuImg[1];
 }
 
-chiButtonOutside = function () {
-  chiButton.image = chiImage[0];
+pikaButtonOutside = function () {
+  pikaButton.image = pikachuImg[0];
 }
 
-chiButtonAway = function () {
-  chiButton.image = chiImage[0];
+pikaButtonAway = function () {
+  pikaButton.image = pikachuImg[1];
   waitForClick = false;
   simpleTimer.start();
 }
