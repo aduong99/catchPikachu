@@ -34,7 +34,7 @@ function preload(){
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  simpleTimer = new Timer(1000);
+  simpleTimer = new Timer(1500);
   simpleTimer.start();
 
   makePikaButton();
@@ -72,7 +72,7 @@ function updateTimer() {
     teamRocketSound.play();
     text("Oh! Too Late! Back To The Wild!", width/2, height/6);
     waitForClick = true;
-    frameRate(0.5);
+    frameRate(0.2);
   }
   else {
     fill(0);
