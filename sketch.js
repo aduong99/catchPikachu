@@ -13,6 +13,7 @@ var waitForClick = true;
 var pikaButton;
 var pikachuImg = [];
 var pikaSound;
+var forest;
 
 //Preload code
 function preload(){
@@ -22,6 +23,8 @@ function preload(){
   pikachuImg[3] = loadImage('assets/pikachu3.png');
 
   pokeball = loadImage('assets/pokeball.png');
+
+  forest = loadImage('assets/forest.jpg');
 
   pikaSound = loadSound('assets/pikachuSound.mp3');
   teamRocketSound = loadSound('assets/teamRocket.mp3')
@@ -43,7 +46,7 @@ function setup() {
 
 //Draw code
 function draw() {
-  background(200,200,100);
+  background(forest);
 
 
   frameRate(60);
@@ -73,8 +76,8 @@ function updateTimer() {
   }
   else {
     fill(0);
-    text("A Wild Pikachu Appears!", width/2, height/5);
-    text('Click To Catch Pikachu Before Time Runs Out!', width/2, height/5 + 50);
+    text("A Wild Pikachu Appears!", width/2, height/6);
+    text('Click To Catch Pikachu Before Time Runs Out!', width/2, height/6 + 50);
   }
 }
 
