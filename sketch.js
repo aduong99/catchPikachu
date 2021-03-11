@@ -11,16 +11,18 @@
 var simpleTimer;
 var waitForClick = true;
 var pikaButton;
+
 var pikachuImg = [];
+var assets = ['pikachu.png', 'pikachu2.png', 'pikachu4.png', 'pikachu3.png'];
 var pikaSound;
 var forest;
 
 //Preload code
 function preload(){
-  pikachuImg[0] = loadImage('assets/pikachu.png');
-  pikachuImg[1] = loadImage('assets/pikachu2.png');
-  pikachuImg[2] = loadImage('assets/pikachu4.png');
-  pikachuImg[3] = loadImage('assets/pikachu3.png');
+
+  for ( var i = 0; i < assets.length; i++ ) {
+    pikachuImg[i] = loadImage('assets/' + assets[i]);
+  }
 
   pokeball = loadImage('assets/pokeball.png');
 
@@ -95,7 +97,7 @@ function makePikaButton() {
     
   pikaButton.color = "#00000000";
   pikaButton.stroke = "#00000000"; 
-  pikaButton.text = " ";
+
 
   pikaButton.onPress = pikaButtonPressed;
   pikaButton.onHover = pikaButtonHover;
