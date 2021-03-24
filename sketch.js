@@ -124,3 +124,4 @@ pikaButtonAway = function () {
   waitForClick = false;
   simpleTimer.start();
 }
+
